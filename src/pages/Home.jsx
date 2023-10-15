@@ -7,22 +7,33 @@ import { toast } from "react-toastify";
 
 export const Home = () => {
   const [dataProducts, setDataProducts] = useState([]);
+  const [limit, setLimit] = useState(4);
+  const [skip, setSkip] = useState(0);
+
+  const changePage = (option) => {
+    if (option === "next") {
+      setSkip(skip + limit);
+    }
+    if (option === "prev" && skip > 0) {
+      setSkip(skip - limit);
+    }
+  };
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await fetchProducts();
+        const data = await fetchProducts({ limit, skip });
         setDataProducts(data.products);
       } catch (error) {
         toast.error("error");
       }
     };
     getData();
-  }, []);
+  }, [limit, skip]);
   return (
     <>
       <Header />
       <ProductList data={dataProducts} />
-      <Pagination />
+      <Pagination changePage={changePage} />
     </>
   );
 };
