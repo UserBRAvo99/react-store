@@ -4,11 +4,13 @@ import { Pagination } from "../components/Pagination/Pagination";
 import { fetchProducts } from "../service/api";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { Cart } from "./Cart";
 
 export const Home = () => {
   const [dataProducts, setDataProducts] = useState([]);
   const [limit, setLimit] = useState(4);
   const [skip, setSkip] = useState(0);
+  const [cart, setCart] = useState([]);
 
   const changePage = (option) => {
     if (option === "next") {
@@ -17,6 +19,9 @@ export const Home = () => {
     if (option === "prev" && skip > 0) {
       setSkip(skip - limit);
     }
+  };
+  const addToCart = (product) => {
+    setCart((prev) => [...prev, product]);
   };
   useEffect(() => {
     const getData = async () => {
@@ -32,8 +37,9 @@ export const Home = () => {
   return (
     <>
       <Header />
-      <ProductList data={dataProducts} />
+      <ProductList data={dataProducts} addToCart={addToCart} />
       <Pagination changePage={changePage} />
+      <Cart cart={cart} />
     </>
   );
 };

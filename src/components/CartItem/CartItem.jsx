@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { StyledButton } from "../../styles/Global";
-export const CartItem = ({ title, price, thumbnail }) => {
+export const CartItem = ({ title, price, thumbnail, id }) => {
   return (
     <ItemCard>
       <img alt={title} src={thumbnail} />

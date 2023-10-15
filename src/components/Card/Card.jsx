@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { StyledButton } from "../../styles/Global";
-export const Card = ({ product }) => {
+export const Card = ({ product, addToCart }) => {
   const { id, title, description, price, thumbnail } = product;
   return (
     <StyledCard>
@@ -9,7 +9,9 @@ export const Card = ({ product }) => {
       <p>{description}</p>
       <Options>
         <span>{price}$</span>
-        <StyledButton>Add to cart</StyledButton>
+        <StyledButton onClick={() => addToCart(product)}>
+          Add to cart
+        </StyledButton>
       </Options>
     </StyledCard>
   );

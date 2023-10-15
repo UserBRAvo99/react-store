@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
 import { Card } from "../Card/Card";
 
-export const ProductList = ({ data }) => {
+export const ProductList = ({ data, addToCart }) => {
   return (
     <StyledList>
       {data.map((product) => (
-        <Card key={product.id} product={product} />
+        <Card key={product.id} product={product} addToCart={addToCart} />
       ))}
     </StyledList>
   );
