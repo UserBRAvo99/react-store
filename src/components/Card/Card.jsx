@@ -1,9 +1,10 @@
 import { styled } from "styled-components";
 import { StyledButton } from "../../styles/Global";
-export const Card = ({ product, addToCart }) => {
+export const Card = ({ product, addToCart, isOpenModal }) => {
   const { id, title, description, price, thumbnail } = product;
   return (
     <StyledCard>
+      <button onClick={isOpenModal}>more</button>
       <img src={thumbnail} alt={title} />
       <h2>{title}</h2>
       <p>{description}</p>

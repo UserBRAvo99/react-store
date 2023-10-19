@@ -1,13 +1,13 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 import { StyledButton } from "../../styles/Global";
 
-export const Modal = ({ children }) => {
+export const Modal = ({ isOpenModal, modalHandleClick, children }) => {
   return (
-    <Wrapper>
+    <Wrapper open={isOpenModal}>
       <Content>
         <Header>
           <h1>Cart</h1>
-          <StyledButton>Close</StyledButton>
+          <StyledButton onClick={modalHandleClick}>Close</StyledButton>
         </Header>
         <hr />
         <Childrens>{children}</Childrens>
@@ -17,13 +17,17 @@ export const Modal = ({ children }) => {
 };
 
 export const Wrapper = styled.div`
-  background-color: rgba(0, 0, 0, 0.4);
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ open }) => {
+    return css`
+      background-color: rgba(0, 0, 0, 0.4);
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: ${open ? "flex" : "none"};
+      justify-content: center;
+      align-items: center;
+    `;
+  }}
 `;
 export const Content = styled.div`
   background-color: white;

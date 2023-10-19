@@ -2,13 +2,18 @@ import { styled } from "styled-components";
 import { Card } from "../Card/Card";
 import { LimitProducts } from "../LimitProductsOnPage/LimitProducts";
 
-export const ProductList = ({ data, addToCart, changeLimit }) => {
+export const ProductList = ({ isOpenModal, data, addToCart, changeLimit }) => {
   return (
     <>
       <LimitProducts changeLimit={changeLimit} />
       <StyledList>
         {data.map((product) => (
-          <Card key={product.id} product={product} addToCart={addToCart} />
+          <Card
+            key={product.id}
+            product={product}
+            addToCart={addToCart}
+            isOpenModal={isOpenModal}
+          />
         ))}
       </StyledList>
     </>

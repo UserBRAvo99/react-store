@@ -5,6 +5,7 @@ import { fetchProducts } from "../service/api";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Cart } from "./Cart";
+import { Modal } from "../components/Modal/Modal";
 
 // 1. Додати видалення з корзини
 // 2. Додати модалку
@@ -18,6 +19,7 @@ export const Home = () => {
   const [limit, setLimit] = useState(4);
   const [skip, setSkip] = useState(0);
   const [cart, setCart] = useState([]);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const changePage = (option) => {
     if (option === "next") {
@@ -43,6 +45,12 @@ export const Home = () => {
   const changeLimit = (e) => {
     setLimit(e.target.value);
   };
+  const toggleModal = (open) => {
+    return setIsOpenModal(!open);
+  };
+  const modalHandleClick = () => {
+    toggleModal(isOpenModal);
+  };
   useEffect(() => {
     const getData = async () => {
       try {
@@ -58,12 +66,16 @@ export const Home = () => {
     <>
       <Header />
       <ProductList
+        isOpenModal={modalHandleClick}
         data={dataProducts}
         addToCart={addToCart}
         changeLimit={changeLimit}
       />
       <Pagination changePage={changePage} skip={skip} />
       <Cart cart={cart} removeFromCart={removeFromCart} />
+      <Modal isOpenModal={isOpenModal} modalHandleClick={modalHandleClick}>
+        <div></div>
+      </Modal>
     </>
   );
 };
