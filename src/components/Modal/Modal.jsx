@@ -1,13 +1,23 @@
 import { css, styled } from "styled-components";
 import { StyledButton } from "../../styles/Global";
 
-export const Modal = ({ isOpenModal, modalHandleClick, children }) => {
+export const Modal = ({
+  modalButtonClose,
+  isOpenModal,
+  modalHandleClick,
+  children,
+}) => {
   return (
-    <Wrapper open={isOpenModal}>
+    <Wrapper
+      onKeyDown={modalButtonClose}
+      id="modalWrapper"
+      open={isOpenModal}
+      onClick={modalHandleClick}
+    >
       <Content>
         <Header>
           <h1>Cart</h1>
-          <StyledButton onClick={modalHandleClick}>Close</StyledButton>
+          <StyledButton id="modalBtnClose">Close</StyledButton>
         </Header>
         <hr />
         <Childrens>{children}</Childrens>

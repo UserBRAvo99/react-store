@@ -48,8 +48,27 @@ export const Home = () => {
   const toggleModal = (open) => {
     return setIsOpenModal(!open);
   };
-  const modalHandleClick = () => {
-    toggleModal(isOpenModal);
+  const modalHandleClick = (e) => {
+    if (
+      e.target.id === "modalBtnClose" ||
+      e.target.id === "modalWrapper" ||
+      e.target.id === "modalBtnOpen"
+    )
+      toggleModal(isOpenModal);
+    scrollStop(isOpenModal);
+  };
+  const modalButtonClose = (e) => {
+    if (e.key === "Escape") {
+      scrollStop(isOpenModal);
+      toggleModal(isOpenModal);
+    }
+  };
+  const scrollStop = (value) => {
+    if (!value) {
+      document.body.style.overflow = "hidden";
+      return;
+    }
+    document.body.style.overflow = "scroll";
   };
   useEffect(() => {
     const getData = async () => {
@@ -62,6 +81,13 @@ export const Home = () => {
     };
     getData();
   }, [limit, skip]);
+
+  useEffect(() => {
+    if (isOpenModal) window.addEventListener("keydown", modalButtonClose);
+    return () => {
+      window.removeEventListener("keydown", modalButtonClose);
+    };
+  });
   return (
     <>
       <Header />
@@ -73,7 +99,11 @@ export const Home = () => {
       />
       <Pagination changePage={changePage} skip={skip} />
       <Cart cart={cart} removeFromCart={removeFromCart} />
-      <Modal isOpenModal={isOpenModal} modalHandleClick={modalHandleClick}>
+      <Modal
+        modalButtonClose={modalButtonClose}
+        isOpenModal={isOpenModal}
+        modalHandleClick={modalHandleClick}
+      >
         <div></div>
       </Modal>
     </>
