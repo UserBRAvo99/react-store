@@ -6,6 +6,13 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Cart } from "./Cart";
 
+// 1. Додати видалення з корзини
+// 2. Додати модалку
+// 3. Підрахунок тотал в корзинці
+// 4. Додаит селект з кількосю елементів
+//5 . Додати стиль для дісейблед кнопок
+//6. Почати робити роути
+
 export const Home = () => {
   const [dataProducts, setDataProducts] = useState([]);
   const [limit, setLimit] = useState(4);
@@ -21,7 +28,20 @@ export const Home = () => {
     }
   };
   const addToCart = (product) => {
+    // Щось пішло не так
+    cart.map((e) => {
+      if (Number(e.id) === Number(product.id)) {
+        return console.log(true);
+      }
+    });
     setCart((prev) => [...prev, product]);
+  };
+  const removeFromCart = (product) => {
+    let result = cart.filter((el) => el.id !== product.id);
+    setCart(result);
+  };
+  const changeLimit = (e) => {
+    setLimit(e.target.value);
   };
   useEffect(() => {
     const getData = async () => {
@@ -37,9 +57,13 @@ export const Home = () => {
   return (
     <>
       <Header />
-      <ProductList data={dataProducts} addToCart={addToCart} />
-      <Pagination changePage={changePage} />
-      <Cart cart={cart} />
+      <ProductList
+        data={dataProducts}
+        addToCart={addToCart}
+        changeLimit={changeLimit}
+      />
+      <Pagination changePage={changePage} skip={skip} />
+      <Cart cart={cart} removeFromCart={removeFromCart} />
     </>
   );
 };

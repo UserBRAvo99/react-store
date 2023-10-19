@@ -1,13 +1,17 @@
 import { styled } from "styled-components";
 import { Card } from "../Card/Card";
+import { LimitProducts } from "../LimitProductsOnPage/LimitProducts";
 
-export const ProductList = ({ data, addToCart }) => {
+export const ProductList = ({ data, addToCart, changeLimit }) => {
   return (
-    <StyledList>
-      {data.map((product) => (
-        <Card key={product.id} product={product} addToCart={addToCart} />
-      ))}
-    </StyledList>
+    <>
+      <LimitProducts changeLimit={changeLimit} />
+      <StyledList>
+        {data.map((product) => (
+          <Card key={product.id} product={product} addToCart={addToCart} />
+        ))}
+      </StyledList>
+    </>
   );
 };
 

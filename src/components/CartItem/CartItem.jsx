@@ -1,12 +1,15 @@
 import { styled } from "styled-components";
 import { StyledButton } from "../../styles/Global";
-export const CartItem = ({ title, price, thumbnail, id }) => {
+export const CartItem = ({ product, removeFromCart }) => {
+  const { title, price, thumbnail, id } = product;
   return (
-    <ItemCard>
+    <ItemCard id={id}>
       <img alt={title} src={thumbnail} />
       <span>{title}</span>
       <span>{price}$</span>
-      <StyledButton>Delete</StyledButton>
+      <StyledButton onClick={() => removeFromCart(product)}>
+        Delete
+      </StyledButton>
     </ItemCard>
   );
 };

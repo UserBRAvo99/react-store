@@ -1,14 +1,20 @@
 import { styled } from "styled-components";
 import { CartItem } from "../components/CartItem/CartItem";
 
-export const Cart = ({ cart }) => {
+export const Cart = ({ cart, removeFromCart }) => {
+  let total = 0;
+  cart.map((e) => (total += e.price));
   return (
     <>
-      <TotalPrice>Total Price: {0}$</TotalPrice>
+      <TotalPrice>Total Price: {total}$</TotalPrice>
       <CartList>
         <hr />
         {cart.map((product) => (
-          <CartItem {...product} key={product.id} />
+          <CartItem
+            product={product}
+            key={product.id}
+            removeFromCart={removeFromCart}
+          />
         ))}
       </CartList>
     </>
