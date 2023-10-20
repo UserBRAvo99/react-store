@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Cart } from "./Cart";
 import { Modal } from "../components/Modal/Modal";
+import { Route, Routes } from "react-router-dom";
 
 // 1. Додати видалення з корзини
 // 2. Додати модалку
@@ -90,7 +91,36 @@ export const Home = () => {
   });
   return (
     <>
-      <Header />
+      <Routes>
+        <Route path="/" element={<Header />}>
+          <Route
+            index
+            element={
+              <>
+                <ProductList
+                  isOpenModal={modalHandleClick}
+                  data={dataProducts}
+                  addToCart={addToCart}
+                  changeLimit={changeLimit}
+                />
+                <Pagination changePage={changePage} skip={skip} />
+              </>
+            }
+          />
+          <Route
+            path="cart"
+            element={<Cart cart={cart} removeFromCart={removeFromCart} />}
+          />
+        </Route>
+      </Routes>
+      <Modal
+        modalButtonClose={modalButtonClose}
+        isOpenModal={isOpenModal}
+        modalHandleClick={modalHandleClick}
+      >
+        <div></div>
+      </Modal>
+      {/* <Header />
       <ProductList
         isOpenModal={modalHandleClick}
         data={dataProducts}
@@ -105,7 +135,7 @@ export const Home = () => {
         modalHandleClick={modalHandleClick}
       >
         <div></div>
-      </Modal>
+      </Modal> */}
     </>
   );
 };

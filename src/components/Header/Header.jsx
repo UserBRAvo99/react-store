@@ -1,14 +1,19 @@
 import { styled } from "styled-components";
 import { StyledButton } from "../../styles/Global";
+import { NavLink, Outlet } from "react-router-dom";
 
 export const Header = () => {
   return (
-    <>
+    <div>
       <StyledHeader>
         <div>Product Store</div>
-        <StyledButtonCard $color>Cart</StyledButtonCard>
+        <NavHeader>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="cart">Cart</NavLink>
+        </NavHeader>
       </StyledHeader>
-    </>
+      <Outlet />
+    </div>
   );
 };
 export const StyledHeader = styled.header`
@@ -23,6 +28,11 @@ export const StyledHeader = styled.header`
   font-weight: bold;
   font-size: 2rem;
 `;
+const NavHeader = styled.nav`
+  display: flex;
+  gap: 20px;
+`;
+//  це краще не рухати, все летить
 const StyledButtonCard = styled(StyledButton)`
   color: black;
   position: relative;
