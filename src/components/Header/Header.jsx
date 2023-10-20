@@ -3,10 +3,12 @@ import { StyledButton } from "../../styles/Global";
 
 export const Header = () => {
   return (
-    <StyledHeader>
-      <div>Product Store</div>
-      <StyledButtonCard $color>Cart </StyledButtonCard>
-    </StyledHeader>
+    <>
+      <StyledHeader>
+        <div>Product Store</div>
+        <StyledButtonCard $color>Cart</StyledButtonCard>
+      </StyledHeader>
+    </>
   );
 };
 export const StyledHeader = styled.header`
