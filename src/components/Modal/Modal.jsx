@@ -8,16 +8,11 @@ export const Modal = ({
   children,
 }) => {
   return (
-    <Wrapper
-      onKeyDown={modalButtonClose}
-      id="modalWrapper"
-      open
-      onClick={modalHandleClick}
-    >
+    <Wrapper onKeyDown={modalButtonClose} open onClick={modalHandleClick}>
       <Content>
         <Header>
           <h1>Cart</h1>
-          <StyledButton id="modalBtnClose">Close</StyledButton>
+          <StyledButton>Close</StyledButton>
         </Header>
         <hr />
         <Childrens>{children}</Childrens>

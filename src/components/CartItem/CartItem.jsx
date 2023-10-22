@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { StyledButton } from "../../styles/Global";
+import { CounterCart } from "../counterCart/CounterCart";
 export const CartItem = ({ product, removeFromCart }) => {
   const { title, price, thumbnail, id } = product;
   return (
@@ -7,6 +8,7 @@ export const CartItem = ({ product, removeFromCart }) => {
       <img alt={title} src={thumbnail} />
       <span>{title}</span>
       <span>{price}$</span>
+      <CounterCart product={product} />
       <StyledButton onClick={() => removeFromCart(product)}>
         Delete
       </StyledButton>

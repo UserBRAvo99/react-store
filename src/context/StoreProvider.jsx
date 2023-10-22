@@ -1,16 +1,11 @@
-import { useEffect } from "react";
-import { createContext, useState } from "react";
-import { fetchProducts } from "../service/api";
-import { toast } from "react-toastify";
+import { createContext } from "react";
 import { useModal } from "../hooks/useModal";
+import { useHTTP } from "../hooks/useHTTP";
+import { useCart } from "../hooks/useCart";
 
 export const StoreContext = createContext();
 
 export const StoreProvider = ({ children }) => {
-  const [dataProducts, setDataProducts] = useState([]);
-  const [limit, setLimit] = useState(4);
-  const [skip, setSkip] = useState(0);
-  const [cart, setCart] = useState([]);
   const {
     modalButtonClose,
     modalHandleClick,
@@ -19,41 +14,8 @@ export const StoreProvider = ({ children }) => {
     openModal,
     content,
   } = useModal();
-  const changePage = (option) => {
-    if (option === "next") {
-      setSkip(skip + limit);
-    }
-    if (option === "prev" && skip > 0) {
-      setSkip(skip - limit);
-    }
-  };
-  const addToCart = (product) => {
-    const isExist = cart.findIndex((item) => item.id === product.id);
-    if (isExist !== -1) {
-      alert("Elem is exist");
-      return;
-    }
-    setCart((prev) => [...prev, product]);
-  };
-  const removeFromCart = (product) => {
-    let result = cart.filter((el) => el.id !== product.id);
-    setCart(result);
-  };
-  const changeLimit = (e) => {
-    setLimit(e.target.value);
-  };
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = await fetchProducts({ limit, skip });
-        setDataProducts(data.products);
-      } catch (error) {
-        toast.error("error");
-      }
-    };
-    getData();
-  }, [limit, skip]);
+  const { dataProducts, skip, changeLimit, changePage } = useHTTP();
+  const { addToCart, removeFromCart, cart, qtyChanger, total } = useCart();
 
   const value = {
     dataProducts,
@@ -69,6 +31,8 @@ export const StoreProvider = ({ children }) => {
     openModal,
     content,
     toggleModal,
+    qtyChanger,
+    total,
   };
   return (
     <StoreContext.Provider value={value}>{children}</StoreContext.Provider>

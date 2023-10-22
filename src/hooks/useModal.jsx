@@ -1,47 +1,40 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useEffect } from "react";
 
 export const useModal = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [content, setContent] = useState();
+  useEffect(() => {
+    if (isOpenModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [isOpenModal]);
+  const modalButtonClose = useCallback((e) => {
+    console.log(e);
+    if (e.key === "Escape") {
+      toggleModal();
+    }
+  }, []);
+  useEffect(() => {
+    if (isOpenModal) window.addEventListener("keydown", modalButtonClose);
+    return () => {
+      window.removeEventListener("keydown", modalButtonClose);
+    };
+  }, [isOpenModal, modalButtonClose]);
+
   const toggleModal = () => {
     return setIsOpenModal((prev) => !prev);
   };
   const openModal = (product) => {
     setContent(product);
     toggleModal();
-    scrollStop();
-  };
-
-  const scrollStop = (value) => {
-    if (!value) {
-      document.body.style.overflow = "hidden";
-      return;
-    }
-    document.body.style.overflow = "scroll";
-  };
-  const modalButtonClose = (e) => {
-    if (e.key === "Escape") {
-      scrollStop(isOpenModal);
-      toggleModal();
-    }
   };
 
   const modalHandleClick = (e) => {
-    if (
-      e.target.id === "modalBtnClose" ||
-      e.target.id === "modalWrapper" ||
-      e.target.id === "modalBtnOpen"
-    )
-      toggleModal();
-    scrollStop(isOpenModal);
+    if (e.target === e.currentTarget) toggleModal();
   };
-  useEffect(() => {
-    if (isOpenModal) window.addEventListener("keydown", modalButtonClose);
-    return () => {
-      window.removeEventListener("keydown", modalButtonClose);
-    };
-  });
 
   return {
     modalButtonClose,
