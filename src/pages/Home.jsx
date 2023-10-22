@@ -32,11 +32,16 @@ export const Home = () => {
   };
   const addToCart = (product) => {
     // Щось пішло не так
-    cart.map((e) => {
-      if (Number(e.id) === Number(product.id)) {
-        return console.log(true);
-      }
-    });
+    // cart.map((e) => {
+    //   if (e.id === product.id) {
+    //     return console.log(true);
+    //   }
+    // });
+    const isExist = cart.findIndex((item) => item.id === product.id);
+    if (isExist !== -1) {
+      alert("Elem is exist");
+      return;
+    }
     setCart((prev) => [...prev, product]);
   };
   const removeFromCart = (product) => {
