@@ -3,9 +3,10 @@ import { App } from "./App";
 import { Global } from "./styles/Global";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { StoreProvider } from "./context/StoreProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <>
+  <StoreProvider>
     <App />
     <Global />
     <ToastContainer
@@ -20,5 +21,5 @@ root.render(
       pauseOnHover
       theme="dark"
     />
-  </>
+  </StoreProvider>
 );

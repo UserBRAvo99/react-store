@@ -1,7 +1,10 @@
 import { styled } from "styled-components";
 import { StyledButton } from "../../styles/Global";
+import { useContext } from "react";
+import { StoreContext } from "../../context/StoreProvider";
 
-export const Pagination = ({ changePage, skip }) => {
+export const Pagination = () => {
+  const { changePage, skip } = useContext(StoreContext);
   return (
     <Paginate>
       <StyledButton

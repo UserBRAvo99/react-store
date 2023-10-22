@@ -1,19 +1,17 @@
 import { styled } from "styled-components";
 import { Card } from "../Card/Card";
 import { LimitProducts } from "../LimitProductsOnPage/LimitProducts";
+import { useContext } from "react";
+import { StoreContext } from "../../context/StoreProvider";
 
-export const ProductList = ({ isOpenModal, data, addToCart, changeLimit }) => {
+export const ProductList = () => {
+  const { dataProducts } = useContext(StoreContext);
   return (
     <>
-      <LimitProducts changeLimit={changeLimit} />
+      <LimitProducts />
       <StyledList>
-        {data.map((product) => (
-          <Card
-            key={product.id}
-            product={product}
-            addToCart={addToCart}
-            isOpenModal={isOpenModal}
-          />
+        {dataProducts.map((product) => (
+          <Card key={product.id} product={product} />
         ))}
       </StyledList>
     </>

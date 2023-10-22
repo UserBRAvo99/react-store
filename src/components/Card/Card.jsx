@@ -1,10 +1,13 @@
 import { styled } from "styled-components";
 import { StyledButton } from "../../styles/Global";
-export const Card = ({ product, addToCart, isOpenModal }) => {
+import { useContext } from "react";
+import { StoreContext } from "../../context/StoreProvider";
+export const Card = ({ product }) => {
   const { id, title, description, price, thumbnail } = product;
+  const { addToCart, openModal } = useContext(StoreContext);
   return (
     <StyledCard>
-      <button id="modalBtnOpen" onClick={isOpenModal}>
+      <button id="modalBtnOpen" onClick={() => openModal(product)}>
         more
       </button>
       <img src={thumbnail} alt={title} />

@@ -1,7 +1,10 @@
 import { styled } from "styled-components";
 import { CartItem } from "../components/CartItem/CartItem";
+import { useContext } from "react";
+import { StoreContext } from "../context/StoreProvider";
 
-export const Cart = ({ cart, removeFromCart }) => {
+export const Cart = () => {
+  const { cart, removeFromCart } = useContext(StoreContext);
   let total = 0;
   cart.map((e) => (total += e.price));
   return (

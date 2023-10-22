@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { StoreContext } from "../../context/StoreProvider";
 
-export const LimitProducts = ({ changeLimit }) => {
+export const LimitProducts = () => {
+  const { changeLimit } = useContext(StoreContext);
   return (
     <Wrapper>
       <Select onChange={changeLimit}>

@@ -3,7 +3,7 @@ import { StyledButton } from "../../styles/Global";
 
 export const Modal = ({
   modalButtonClose,
-  isOpenModal,
+
   modalHandleClick,
   children,
 }) => {
@@ -11,7 +11,7 @@ export const Modal = ({
     <Wrapper
       onKeyDown={modalButtonClose}
       id="modalWrapper"
-      open={isOpenModal}
+      open
       onClick={modalHandleClick}
     >
       <Content>
