@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export const useCart = () => {
   const [cart, setCart] = useState([]);
@@ -7,8 +8,11 @@ export const useCart = () => {
   const addToCart = (product) => {
     const isExist = cart.findIndex((item) => item.id === product.id);
     if (isExist !== -1) {
-      alert("Elem is exist");
-      return;
+      return setCart(
+        cart.map((item) =>
+          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
+        )
+      );
     }
     setCart((prev) => [...prev, { ...product, qty: 1 }]);
   };
@@ -25,6 +29,9 @@ export const useCart = () => {
         )
       );
     } else {
+      if (product.qty === 1) {
+        return removeFromCart(product);
+      }
       setCart(
         cart.map((item) =>
           item.id === product.id ? { ...item, qty: item.qty - 1 } : item
