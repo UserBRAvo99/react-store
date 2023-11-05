@@ -1,17 +1,25 @@
 import { styled } from "styled-components";
 import { StyledButton } from "../../styles/Global";
 import { NavLink, Outlet } from "react-router-dom";
-
+import { useMediaQuery } from "react-responsive";
 export const Header = () => {
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   return (
     <div>
-      <StyledHeader>
-        <div>Product Store</div>
-        <NavHeader>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="cart">Cart</NavLink>
-        </NavHeader>
-      </StyledHeader>
+      {isTabletOrMobile ? (
+        <StyledHeader>
+          <div>Product Store</div>
+          <NavHeader>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="cart">Cart</NavLink>
+          </NavHeader>
+        </StyledHeader>
+      ) : (
+        <div>
+          <img src="../../../public/fb.svg" />
+        </div>
+      )}
+
       <Outlet />
     </div>
   );
