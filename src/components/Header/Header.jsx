@@ -6,13 +6,23 @@ export const Header = () => {
 			<StyledHeader>
 				<div>Posts</div>
 				<NavHeader>
-					<NavLink to='/'>Home</NavLink>
+					<StyledLink to='/'>Home</StyledLink>
+					<StyledLink to='/counter'>Counter</StyledLink>
+					<StyledLink to='/posts'>Posts</StyledLink>
+					<StyledLink to='/todos'>Tasks</StyledLink>
 				</NavHeader>
 			</StyledHeader>
 			<Outlet />
 		</div>
 	)
 }
+export const StyledLink = styled(NavLink)`
+	text-decoration: none;
+	color: white;
+	&.active {
+		color: black;
+	}
+`
 export const StyledHeader = styled.header`
 	padding: 20px 150px;
 	background-color: ${props => (props.$color ? 'red' : 'green')};
