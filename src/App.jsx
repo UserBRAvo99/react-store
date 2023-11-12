@@ -4,7 +4,10 @@ import { Home } from './pages/Home'
 import { Counter } from './pages/Counter'
 import { Posts } from './pages/Posts'
 import { TodoList } from './pages/TodoList'
-
+//https://node-api-solution.onrender.com/api/auth/register
+//https://node-api-solution.onrender.com/api/auth/login
+//https://node-api-solution.onrender.com/api/auth/logout
+//https://node-api-solution.onrender.com/api/auth/current
 export const App = () => {
 	return (
 		<BrowserRouter>
