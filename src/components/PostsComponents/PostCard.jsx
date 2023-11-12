@@ -3,6 +3,7 @@ import { deletePost } from '../../redux/postsSlice'
 
 export const PostCard = ({ id, title, description, time, author }) => {
 	const dispatch = useDispatch()
+
 	return (
 		<li>
 			<div>
