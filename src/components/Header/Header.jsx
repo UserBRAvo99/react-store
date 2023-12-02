@@ -1,12 +1,15 @@
 import { styled } from 'styled-components'
 import { NavLink, Outlet } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { logoutThunk } from '../../redux/auth/operations'
+import { selectIsLoggedIn, selectUser } from '../../redux/auth/selectors'
 export const Header = () => {
 	const dispatch = useDispatch()
 	const handleLogout = () => {
 		dispatch(logoutThunk())
 	}
+	const { name } = useSelector(selectUser)
+	const isLoggedIn = useSelector(selectIsLoggedIn)
 	return (
 		<div>
 			<StyledHeader>
@@ -16,10 +19,15 @@ export const Header = () => {
 					<StyledLink to='/counter'>Counter</StyledLink>
 					<StyledLink to='/posts'>Posts</StyledLink>
 					<StyledLink to='/todos'>Tasks</StyledLink>
-					<StyledLink to='/login'>Login</StyledLink>
-					<StyledLink to='/register'>Register</StyledLink>
-					<button onClick={handleLogout}>Logout</button>
+					{!isLoggedIn && (
+						<>
+							<StyledLink to='/login'>Login</StyledLink>
+							<StyledLink to='/register'>Register</StyledLink>
+						</>
+					)}
+					{isLoggedIn && <button onClick={handleLogout}>Logout</button>}
 				</NavHeader>
+				<h2>{name}</h2>
 			</StyledHeader>
 			<Outlet />
 		</div>
