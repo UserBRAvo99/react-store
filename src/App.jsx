@@ -6,9 +6,10 @@ import { Posts } from './pages/Posts'
 import { TodoList } from './pages/TodoList'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { refreshThunk } from './redux/auth/operations'
+import { selectIsLoggedIn } from './redux/auth/selectors'
 
 //https://node-api-solution.onrender.com/api/auth/register
 //https://node-api-solution.onrender.com/api/auth/login
@@ -23,19 +24,27 @@ export const App = () => {
 	useEffect(() => {
 		dispatch(refreshThunk())
 	}, [dispatch])
+	const isLoggedIn = useSelector(selectIsLoggedIn)
 	return (
 		<BrowserRouter>
 			<Header />
-			<Routes>
-				<Route path='/' element={<Home />} />
-				<Route path='/counter' element={<Counter />} />
-				<Route path='/posts' element={<Posts />} />
-				<Route path='/todos' element={<TodoList />} />
-				<Route path='/login' element={<Login />} />
-				<Route path='/register' element={<Register />} />
+			{isLoggedIn ? (
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/counter' element={<Counter />} />
+					<Route path='/posts' element={<Posts />} />
+					<Route path='/todos' element={<TodoList />} />
+					<Route path='*' element={<h1>Not found</h1>} />
+				</Routes>
+			) : (
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/login' element={<Login />} />
+					<Route path='/register' element={<Register />} />
 
-				<Route path='*' element={<h1>Not found</h1>} />
-			</Routes>
+					<Route path='*' element={<h1>Not found</h1>} />
+				</Routes>
+			)}
 		</BrowserRouter>
 	)
 }

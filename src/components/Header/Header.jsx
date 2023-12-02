@@ -16,16 +16,21 @@ export const Header = () => {
 				<div>Posts</div>
 				<NavHeader>
 					<StyledLink to='/'>Home</StyledLink>
-					<StyledLink to='/counter'>Counter</StyledLink>
-					<StyledLink to='/posts'>Posts</StyledLink>
-					<StyledLink to='/todos'>Tasks</StyledLink>
+
 					{!isLoggedIn && (
 						<>
 							<StyledLink to='/login'>Login</StyledLink>
 							<StyledLink to='/register'>Register</StyledLink>
 						</>
 					)}
-					{isLoggedIn && <button onClick={handleLogout}>Logout</button>}
+					{isLoggedIn && (
+						<>
+							<StyledLink to='/counter'>Counter</StyledLink>
+							<StyledLink to='/posts'>Posts</StyledLink>
+							<StyledLink to='/todos'>Tasks</StyledLink>
+							<button onClick={handleLogout}>Logout</button>
+						</>
+					)}
 				</NavHeader>
 				<h2>{name}</h2>
 			</StyledHeader>
