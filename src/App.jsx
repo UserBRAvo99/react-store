@@ -9,6 +9,9 @@ import { TodoList } from './pages/TodoList'
 //https://node-api-solution.onrender.com/api/auth/login
 //https://node-api-solution.onrender.com/api/auth/logout
 //https://node-api-solution.onrender.com/api/auth/current
+// https://cute-todo-api-rwtq.onrender.com/api/auth/register
+// https://cute-todo-api-rwtq.onrender.com/api/auth/login
+// https://cute-todo-api-rwtq.onrender.com/api/auth/logout
 
 export const App = () => {
 	return (
