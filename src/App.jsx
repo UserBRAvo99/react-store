@@ -6,6 +6,9 @@ import { Posts } from './pages/Posts'
 import { TodoList } from './pages/TodoList'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { refreshThunk } from './redux/auth/operations'
 
 //https://node-api-solution.onrender.com/api/auth/register
 //https://node-api-solution.onrender.com/api/auth/login
@@ -16,6 +19,10 @@ import { Register } from './pages/Register'
 // https://cute-todo-api-rwtq.onrender.com/api/auth/logout
 
 export const App = () => {
+	const dispatch = useDispatch()
+	useEffect(() => {
+		dispatch(refreshThunk())
+	}, [dispatch])
 	return (
 		<BrowserRouter>
 			<Header />

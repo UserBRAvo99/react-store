@@ -1,6 +1,12 @@
 import { styled } from 'styled-components'
 import { NavLink, Outlet } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { logoutThunk } from '../../redux/auth/operations'
 export const Header = () => {
+	const dispatch = useDispatch()
+	const handleLogout = () => {
+		dispatch(logoutThunk())
+	}
 	return (
 		<div>
 			<StyledHeader>
@@ -12,6 +18,7 @@ export const Header = () => {
 					<StyledLink to='/todos'>Tasks</StyledLink>
 					<StyledLink to='/login'>Login</StyledLink>
 					<StyledLink to='/register'>Register</StyledLink>
+					<button onClick={handleLogout}>Logout</button>
 				</NavHeader>
 			</StyledHeader>
 			<Outlet />

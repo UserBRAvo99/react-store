@@ -1,22 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addTodo, deleteTodo } from '../redux/todoSlice'
 import { nanoid } from '@reduxjs/toolkit'
+import { addTodoThunk, deleteTodoThunk, fetchTodoThunk } from '../redux/operations'
 
 export const TodoList = () => {
+	const dispatch = useDispatch()
+	useEffect(() => {
+		dispatch(fetchTodoThunk())
+	}, [dispatch])
+
 	const [value, setValue] = useState('')
 	const { todos } = useSelector(state => state.todoList)
-	const dispatch = useDispatch()
 	const handleSubmit = e => {
 		e.preventDefault()
 		console.log(value)
 		const newTodo = { id: nanoid(), text: value }
-		dispatch(addTodo(newTodo))
+		dispatch(addTodoThunk({ title: value }))
 		setValue('')
 	}
 	const handleDelete = id => {
 		console.log(id)
-		dispatch(deleteTodo(id))
+		dispatch(deleteTodoThunk(id))
 	}
 	return (
 		<div>
@@ -26,8 +31,8 @@ export const TodoList = () => {
 			</form>
 			<ul>
 				{todos.map(todo => (
-					<li key={todo.id}>
-						{todo.text} <button onClick={() => handleDelete(todo.id)}>Delete </button>
+					<li key={todo._id}>
+						{todo.title} <button onClick={() => handleDelete(todo._id)}>Delete </button>
 					</li>
 				))}
 			</ul>
