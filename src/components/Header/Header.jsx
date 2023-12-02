@@ -10,6 +10,8 @@ export const Header = () => {
 					<StyledLink to='/counter'>Counter</StyledLink>
 					<StyledLink to='/posts'>Posts</StyledLink>
 					<StyledLink to='/todos'>Tasks</StyledLink>
+					<StyledLink to='/login'>Login</StyledLink>
+					<StyledLink to='/register'>Register</StyledLink>
 				</NavHeader>
 			</StyledHeader>
 			<Outlet />

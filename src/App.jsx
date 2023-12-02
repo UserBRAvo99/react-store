@@ -4,6 +4,8 @@ import { Home } from './pages/Home'
 import { Counter } from './pages/Counter'
 import { Posts } from './pages/Posts'
 import { TodoList } from './pages/TodoList'
+import { Login } from './pages/Login'
+import { Register } from './pages/Register'
 
 //https://node-api-solution.onrender.com/api/auth/register
 //https://node-api-solution.onrender.com/api/auth/login
@@ -22,6 +24,9 @@ export const App = () => {
 				<Route path='/counter' element={<Counter />} />
 				<Route path='/posts' element={<Posts />} />
 				<Route path='/todos' element={<TodoList />} />
+				<Route path='/login' element={<Login />} />
+				<Route path='/register' element={<Register />} />
+
 				<Route path='*' element={<h1>Not found</h1>} />
 			</Routes>
 		</BrowserRouter>
