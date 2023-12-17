@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 export const useCart = () => {
   const [cart, setCart] = useState([]);
@@ -21,19 +20,6 @@ export const useCart = () => {
     setCart(result);
   };
 
-	const qtyChanger = ({ product, type }) => {
-		if (type === 'plus') {
-			setCart(cart.map(item => (item.id === product.id ? { ...item, qty: item.qty + 1 } : item)))
-		} else {
-			if (product.qty === 1) {
-				return removeFromCart(product)
-			}
-			setCart(cart.map(item => (item.id === product.id ? { ...item, qty: item.qty - 1 } : item)))
-		}
-	}
-
-	return { addToCart, removeFromCart, cart, qtyChanger, total }
-}
   const qtyChanger = ({ product, type }) => {
     if (type === "plus") {
       setCart(
@@ -55,3 +41,24 @@ export const useCart = () => {
 
   return { addToCart, removeFromCart, cart, qtyChanger, total };
 };
+//   const qtyChanger = ({ product, type }) => {
+//     if (type === "plus") {
+//       setCart(
+//         cart.map((item) =>
+//           item.id === product.id ? { ...item, qty: item.qty + 1 } : item
+//         )
+//       );
+//     } else {
+//       if (product.qty === 1) {
+//         return removeFromCart(product);
+//       }
+//       setCart(
+//         cart.map((item) =>
+//           item.id === product.id ? { ...item, qty: item.qty - 1 } : item
+//         )
+//       );
+//     }
+//   };
+
+//   return { addToCart, removeFromCart, cart, qtyChanger, total };
+// };
