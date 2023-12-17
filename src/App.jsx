@@ -11,14 +11,6 @@ import { useEffect } from 'react'
 import { refreshThunk } from './redux/auth/operations'
 import { selectIsLoggedIn, selectIsRefresh } from './redux/auth/selectors'
 
-//https://node-api-solution.onrender.com/api/auth/register
-//https://node-api-solution.onrender.com/api/auth/login
-//https://node-api-solution.onrender.com/api/auth/logout
-//https://node-api-solution.onrender.com/api/auth/current
-// https://cute-todo-api-rwtq.onrender.com/api/auth/register
-// https://cute-todo-api-rwtq.onrender.com/api/auth/login
-// https://cute-todo-api-rwtq.onrender.com/api/auth/logout
-
 export const App = () => {
 	const dispatch = useDispatch()
 	useEffect(() => {
