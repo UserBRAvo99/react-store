@@ -9,7 +9,7 @@ import { Register } from './pages/Register'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { refreshThunk } from './redux/auth/operations'
-import { selectIsLoggedIn } from './redux/auth/selectors'
+import { selectIsLoggedIn, selectIsRefresh } from './redux/auth/selectors'
 
 //https://node-api-solution.onrender.com/api/auth/register
 //https://node-api-solution.onrender.com/api/auth/login
@@ -25,7 +25,10 @@ export const App = () => {
 		dispatch(refreshThunk())
 	}, [dispatch])
 	const isLoggedIn = useSelector(selectIsLoggedIn)
-	return (
+	const isRefresh = useSelector(selectIsRefresh)
+	return isRefresh ? (
+		<h1>Loading...</h1>
+	) : (
 		<BrowserRouter>
 			<Header />
 			{isLoggedIn ? (
@@ -41,7 +44,6 @@ export const App = () => {
 					<Route path='/' element={<Home />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Register />} />
-
 					<Route path='*' element={<h1>Not found</h1>} />
 				</Routes>
 			)}
