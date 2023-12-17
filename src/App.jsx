@@ -11,6 +11,7 @@ import { useEffect } from 'react'
 import { refreshThunk } from './redux/auth/operations'
 import { selectIsLoggedIn, selectIsRefresh } from './redux/auth/selectors'
 
+// TEST GIT FN
 export const App = () => {
 	const dispatch = useDispatch()
 	useEffect(() => {
